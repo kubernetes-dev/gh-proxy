@@ -1,0 +1,20 @@
+version: '3.9'
+networks:
+ default:
+   name: bright
+   external: true
+services:
+  gh-proxy:
+    image: gh-proxy:latest
+    container_name: gh-proxy
+    ports:
+      - target: 80
+        published: 3297
+        protocol: tcp
+        mode: host
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Asia/Shanghai
+    restart: unless-stopped
+    mem_limit: 256M
